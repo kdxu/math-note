@@ -80,11 +80,67 @@ e1*** + ... ei(\sigmaW_ij x_j + bi) + ... + bk
 
 - 勾配法(Gradient Decent)
 
-f : R^n -> R みたいな関数に対して
-x(0) みたいな初期値をとり、これを
-x(n+1) = x(n) - c * \delta f(x_n) という漸化式で近似
-c * \delta f(x_n) : 傾きに対して逆向きのベクトル
+`f : R^n -> R` みたいな関数に対して
+`x(0)` みたいな初期値をとり、これを
+`x(n+1) = x(n) - c * \delta f(x_n)` という漸化式で近似
 
+`c * \delta f(x_n)` : 傾きに対して逆向きのベクトル
+
+勾配をプログラムで計算
+
+`(f: R -> R) ~~> \delta f` は必ずしも出せない
+
+## Fiat
+
+仕様を書いて、そこからプログラムを作っていくというのをサポートするもの
+
+Mostly Automated Synthesis of Correct-by-Construction Programs http://plv.csail.mit.edu/fiat/
+https://github.com/mit-plv/fiat
+
+勾配法とかを例にとると、
+``` 
+is_grad (f f': R->R) : Prop
+```
+のとき
+```
+Definition grad (f: R->R): Comp(R->R) :=
+ {f' | is_grad f f'}%comp.
+```
+のように書ける
+
+`is_grad`のような二項関係があった時に、そこから関数を作りたい時に
+`Comp`(戻り値の型)というコンストラクタと{ _ | _ }のような`syntax`を使って定義する手法。
+全域関数になるかはわからないので`Comp`というコンストラクタにはいる
+
+fiatの式で書くと
+
+```
+Definition : gd. x_0 : Comp R :=
+f' <- grad f
+ret (gd' f' c x_0)
+```
+
+↑f' に fの勾配が代入された気持ち
+ちょっとついていけなくなってきた...
+
+例
+`(x - a)^2`
+に対する勾配をfiatで書くと
+```
+Lemma guad_grad (a : R) :
+{f' | refine (grad (fnn x => (x - a)^2))}
+(ret f')}%type
+```
+
+Fiatには`refine`という型コンストラクタがある
+
+`refine`で中身を書き換えられる
+
+`Comp` は `Free Monad` っぽい？
+
+https://github.com/mit-plv/fiat/blob/311cf123ba377d6c792b3a24db69d654917e9db0/src/Computation/Core.v#L5
+
+機械学習を定式化するのすごい気合を感じる
 
 # @pi8027 さん: 「線形算術の量化子除去の原理」
 
