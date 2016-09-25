@@ -265,4 +265,8 @@ parsable r [ ] = \epsilon ∈ L(r1)
 POSIX(v, r) = forall v2 |- c2 : r ∧ |v2| = |v|
 -> v ≧_r v2
 ```
-substringに関して、比べられないときもある
+
+Left vs Right の比較の強さは A1, A2 で、 len の比較に等号が入るかどうかであり
+Right vs Right, Left vs Left は単に >_1  で比べている。
+
+http://www.home.hs-karlsruhe.de/~suma0002/publications/regex-parsing-derivatives.pdf
