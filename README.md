@@ -1,1 +1,3 @@
-# math-note
+# study-note
+
+おべんきょう、イベントのメモなど
