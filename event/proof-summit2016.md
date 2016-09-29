@@ -1,4 +1,20 @@
-途中からしかメモ取れなかったのでほとんど午後からのメモになります
+# Proof Summit 2016
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [@ksknac さん「Bコンビネータの話」](#ksknac-%E3%81%95%E3%82%93%E3%80%8Cb%E3%82%B3%E3%83%B3%E3%83%93%E3%83%8D%E3%83%BC%E3%82%BF%E3%81%AE%E8%A9%B1%E3%80%8D)
+- [@kaizen_nagoya さん: 「JAXA/IPA クリティカルソフトウェアワークショップ　言語系発表とその後」](#kaizen_nagoya-%E3%81%95%E3%82%93-%E3%80%8Cjaxaipa-%E3%82%AF%E3%83%AA%E3%83%86%E3%82%A3%E3%82%AB%E3%83%AB%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%83%E3%83%97%E3%80%80%E8%A8%80%E8%AA%9E%E7%B3%BB%E7%99%BA%E8%A1%A8%E3%81%A8%E3%81%9D%E3%81%AE%E5%BE%8C%E3%80%8D)
+- [@erutuf13 さん: Coq で機械学習した話](#erutuf13-%E3%81%95%E3%82%93-coq-%E3%81%A7%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92%E3%81%97%E3%81%9F%E8%A9%B1)
+  - [NVL : nested vector language](#nvl--nested-vector-language)
+  - [Machine Learning の話](#machine-learning-%E3%81%AE%E8%A9%B1)
+  - [Fiat](#fiat)
+- [@pi8027 さん: 「線形算術の量化子除去の原理」](#pi8027-%E3%81%95%E3%82%93-%E3%80%8C%E7%B7%9A%E5%BD%A2%E7%AE%97%E8%A1%93%E3%81%AE%E9%87%8F%E5%8C%96%E5%AD%90%E9%99%A4%E5%8E%BB%E3%81%AE%E5%8E%9F%E7%90%86%E3%80%8D)
+  - [何につかえるのか](#%E4%BD%95%E3%81%AB%E3%81%A4%E3%81%8B%E3%81%88%E3%82%8B%E3%81%AE%E3%81%8B)
+  - [Farkas の補題](#farkas-%E3%81%AE%E8%A3%9C%E9%A1%8C)
+- [@eldesh さん: 「VerifastによるPOSIX正規表現マッチングの検証に向けて」](#eldesh-%E3%81%95%E3%82%93-%E3%80%8Cverifast%E3%81%AB%E3%82%88%E3%82%8Bposix%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%E3%83%9E%E3%83%83%E3%83%81%E3%83%B3%E3%82%B0%E3%81%AE%E6%A4%9C%E8%A8%BC%E3%81%AB%E5%90%91%E3%81%91%E3%81%A6%E3%80%8D)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # @ksknac さん「Bコンビネータの話」
 
@@ -124,7 +140,7 @@ Mostly Automated Synthesis of Correct-by-Construction Programs http://plv.csail.
 https://github.com/mit-plv/fiat
 
 勾配法とかを例にとると、
-``` 
+```
 is_grad (f f': R->R) : Prop
 ```
 のとき
@@ -170,10 +186,10 @@ https://github.com/mit-plv/fiat/blob/311cf123ba377d6c792b3a24db69d654917e9db0/sr
 
 # @pi8027 さん: 「線形算術の量化子除去の原理」
 
-紙の資料を配られていたので、こちらにはあまりメモ残していません 
-一般的な量化子除去QEの原理を与える 
-有理数、有理数や実数の順序体に関する一次不等式の理論では Fourier-Motzkin 消去法が知られている 
-自然数、実数に関する一次不等式の理論（プレスバーガー算術）として幾つかの手法がある 
+紙の資料を配られていたので、こちらにはあまりメモ残していません
+一般的な量化子除去QEの原理を与える
+有理数、有理数や実数の順序体に関する一次不等式の理論では Fourier-Motzkin 消去法が知られている
+自然数、実数に関する一次不等式の理論（プレスバーガー算術）として幾つかの手法がある
 
 ## 何につかえるのか
 - 決定可能であるという事実が自動証明に使われている
@@ -200,7 +216,7 @@ m * n 行列 A と m 次元ベクトル b において以下の 2 条件は同�
 - 一般的な正規表現
 
 ```ocaml
-Regex 
+Regex
  = eps (空列)
  | \phi (何もマッチしない EOF)
  | l (symbol)
@@ -212,10 +228,10 @@ Regex
 
 - 微分に関する幾つかの性質
 ```
-r\l 
+r\l
 
 r1 + r2\l = r1 \ l + r2 \ l
-r1r2 \ l = { 
+r1r2 \ l = {
  (r1 \ l) r2 + r2 \ l  ... \epsilon ∈ L(r1)
  (r1 \ l) r2
 }
@@ -237,26 +253,26 @@ parsable r [ ] = \epsilon ∈ L(r1)
 |- [] : r*
 |- v : r |- vs : r*
 -------------------
-|- (v :: vs) : r* 
+|- (v :: vs) : r*
 ```
 
 ```
 |- v1 : r1 |- v2 : r2
 -------------------
-|- (v1,  v2) : r1r2 
+|- (v1,  v2) : r1r2
 ```
 
 ```
-|- v1 : r1 
+|- v1 : r1
 -------------------
-|- Left v1 : r1 + r2 
+|- Left v1 : r1 + r2
 ```
 
 ```
-|- () : eps 
+|- () : eps
 |- v2 : r2
 -------------------
-|- Right v2 : r1 + r2 
+|- Right v2 : r1 + r2
 ```
 
 - POSIX マッチング戦略
