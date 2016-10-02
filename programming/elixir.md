@@ -54,3 +54,74 @@ Elixirでの問題の解き方はUnix シェルと同様であり、コマンド
 プログラミング一般の考え方では、関数は入力を出力に変換させるものである。
 オブジェクト指向の考え方に慣れていると大変かもしれませんが、関数型を楽しくやっていこう！
 みたいな良い話
+
+## 第2章
+
+### 代入
+
+```elixir
+iex > a = 1
+1
+iex > 1 = a
+1
+iex > 2 = a
+ //=> MatchError
+
+```
+
+Elixirの比較は代入というより代数的な比較に近い。
+
+### リストのマッチ
+
+- 練習問題
+[[a]] = [[1, 2, 3]]
+[a,b] = [1, 2, 3]
+はマッチされない。なぜなら、値の中に対応する  `単一の`項がないからだ。
+
+### アンダースコア
+
+```elixir
+iex> [1, 2, _] = [1,2,3]
+```
+ワイルドカード的に使える。
+
+### pin operator
+
+
+```elixir
+
+iex> a = 1
+1
+iex> a = 2
+2
+iex>^a = 1
+#\> MatchError
+```
+
+すでにある変数の値を使いたいときはキャレット(^)演算子を用いる。
+
+Elixirではすべてのデータが不変である。いわゆるストリクトな関数型とここらへんは近い。
+
+```elixir
+defmodule Chop do
+  def guess(actual, a..b) do
+    midp = a + div(b-a, 2)
+    IO.puts("Is it #{midp}")
+    compare(actual, midp, a..b)
+  end
+
+  defp compare(actual, midpoint, _.._) when actual == midpoint do
+    IO.puts("It is #{actual}")
+  end
+
+  defp compare(actual, midpoint, a.._) when actual < midpoint do
+    guess(actual, a..midpoint)
+  end
+
+  defp compare(actual, midpoint, _..b) when actual >= midpoint do
+    guess(actual, midpoint..b)
+  end
+
+end
+
+```
