@@ -27,6 +27,7 @@
     - [パターンマッチ](#%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%83%9E%E3%83%83%E3%83%81)
     - [パターンマッチはキーに値を束縛できない](#%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%83%9E%E3%83%83%E3%83%81%E3%81%AF%E3%82%AD%E3%83%BC%E3%81%AB%E5%80%A4%E3%82%92%E6%9D%9F%E7%B8%9B%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84)
   - [マップの更新](#%E3%83%9E%E3%83%83%E3%83%97%E3%81%AE%E6%9B%B4%E6%96%B0)
+- [構造体](#%E6%A7%8B%E9%80%A0%E4%BD%93)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -545,3 +546,11 @@ new_map = %{old_map | key => value, ...}
 
 のような書き方でマップを更新できる。
 新しいキーをマップに追加するには `Map.put_new/3`を使う。
+
+## 構造体
+
+```elixir
+defmodule Subscriber do
+  defstruct name: "", paid: false, over_18: true
+end
+```
