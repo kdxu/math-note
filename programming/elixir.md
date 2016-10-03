@@ -20,6 +20,13 @@
   - [Elixir, Erlang, アトム](#elixir-erlang-%E3%82%A2%E3%83%88%E3%83%A0)
     - [Erlangライブラリの呼び出し](#erlang%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%AE%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97)
 - [第7章 リストと再帰](#%E7%AC%AC7%E7%AB%A0-%E3%83%AA%E3%82%B9%E3%83%88%E3%81%A8%E5%86%8D%E5%B8%B0)
+- [第8章 マップ、キーワードリスト、セット、構造体](#%E7%AC%AC8%E7%AB%A0-%E3%83%9E%E3%83%83%E3%83%97%E3%80%81%E3%82%AD%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%89%E3%83%AA%E3%82%B9%E3%83%88%E3%80%81%E3%82%BB%E3%83%83%E3%83%88%E3%80%81%E6%A7%8B%E9%80%A0%E4%BD%93)
+  - [map vs keyword list](#map-vs-keyword-list)
+  - [キーワードリスト](#%E3%82%AD%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%89%E3%83%AA%E3%82%B9%E3%83%88)
+  - [マップ](#%E3%83%9E%E3%83%83%E3%83%97)
+    - [パターンマッチ](#%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%83%9E%E3%83%83%E3%83%81)
+    - [パターンマッチはキーに値を束縛できない](#%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%83%9E%E3%83%83%E3%83%81%E3%81%AF%E3%82%AD%E3%83%BC%E3%81%AB%E5%80%A4%E3%82%92%E6%9D%9F%E7%B8%9B%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84)
+  - [マップの更新](#%E3%83%9E%E3%83%83%E3%83%97%E3%81%AE%E6%9B%B4%E6%96%B0)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -413,3 +420,128 @@ def span(from, to) when from < to do
 end
 def span(from, to) when from == to, do: [to]
 ```
+
+## 第8章 マップ、キーワードリスト、セット、構造体
+
+### map vs keyword list
+
+- パターンマッチを行いたい時はmap
+- 同じキーを持つエントリが複数現れる時はkeyword
+- 要素の順番を保証しないといけない時はkeyword
+- それ以外はmap
+
+### キーワードリスト
+
+```elixir
+defmodule Canvas do
+  @defaults [fg: "black", bg: "white", font: "Merriweather"]
+
+  def draw_text(text, options \\ []) do
+    options = Keyword.merge(@defaults, options)
+    IO.puts "Drawing text #{inspect(text)}"
+    IO.puts "Foreground : #{options[:fg]}"
+    IO.puts "Background : #{Keyword.get(options, :bg)}"
+    IO.puts "Font : #{Keyword.get(options,:font)}"
+    IO.puts "Style : #{inspect Keyword.get_values(options, :style)}"
+  end
+end
+```
+
+### マップ
+
+```elixir
+
+iex(IEX-8684@gergate)67> map = %{name: "Dave", likes: "Programming", where: "Daras"}
+%{likes: "Programming", name: "Dave", where: "Daras"}
+iex(IEX-8684@gergate)68> Map.keys map
+[:likes, :name, :where]
+iex(IEX-8684@gergate)69> Map.values map
+["Programming", "Dave", "Daras"]
+iex(IEX-8684@gergate)70> map[:name]
+"Dave"
+iex(IEX-8684@gergate)71> map1 = Map.d
+delete/2    drop/2
+iex(IEX-8684@gergate)71> map1 = Map.drop map, [:where, :likes]
+%{name: "Dave"}
+iex(IEX-8684@gergate)72> map1 = Map.p map, [:where, :likes]
+pop/2             pop/3             pop_lazy/3        put/3
+put_new/3         put_new_lazy/3
+iex(IEX-8684@gergate)72> map1 = Map.put map, :also_likes, "Ruby"
+%{also_likes: "Ruby", likes: "Programming", name: "Dave", where: "Daras"}
+iex(IEX-8684@gergate)73> Map.has_key? map1, :where
+true
+iex(IEX-8684@gergate)74> {value, updated_map} = Map.pop map1, :also_likes
+{"Ruby", %{likes: "Programming", name: "Dave", where: "Daras"}}
+
+```
+
+MapのAPIでいろいろできる
+
+#### パターンマッチ
+
+```elixir
+iex(IEX-8684@gergate)75> person = %{name: "Dave", height: 1.88}
+%{height: 1.88, name: "Dave"}
+iex(IEX-8684@gergate)76> %{name: a_name} = person
+%{height: 1.88, name: "Dave"}
+iex(IEX-8684@gergate)77> a_name
+"Dave"
+iex(IEX-8684@gergate)78> %{name: _, height: _} = person
+%{height: 1.88, name: "Dave"}
+iex(IEX-8684@gergate)79> %{name: "Dave"} = person
+%{height: 1.88, name: "Dave"}
+iex(IEX-8684@gergate)80> %{name: _, weight: _} = person
+** (MatchError) no match of right hand side value: %{height: 1.88, name: "Dave"}
+
+```
+
+キーや値に対してパターンマッチをすることができる。
+
+```elixir
+people = [
+  %{ name: "Grumpy", height: 1.24 },
+  %{ name: "Dave", height: 1.88 },
+  %{ name: "Dopey", height: 1.32 },
+  %{ name: "Shaquille", height: 2.16 },
+  %{ name: "Snezzy", height: 1.28 }
+]
+
+IO.inspect(for person = %{height: height} <- people, height > 1.5, do: person)
+#=> [%{height: 1.88, name: "Dave"}, %{height: 2.16, name: "Shaquille"}]
+```
+
+マップのリストを内包表記してそれぞれのマップをpersonに束縛し変数heightでフィルタし、doブロックでperson全体を出力している。
+
+
+#### パターンマッチはキーに値を束縛できない
+
+`%{2 => state} = %{1 => :ok, 2 => :error}`
+
+はできるけど、
+
+`%{item => :ok} = %{1 => :ok, 2 => :error}`
+
+のように書くことはできない。
+
+ピン演算子に変数を束縛することもできる。
+
+```elixir
+
+iex(IEX-8684@gergate)81> data = %{name: "Dave", state: "TX", likes: "Elixir"}
+%{likes: "Elixir", name: "Dave", state: "TX"}
+iex(IEX-8684@gergate)82> for key <- [:name, :likes] do
+...(IEX-8684@gergate)82> %{^key => value} = data
+...(IEX-8684@gergate)82> value
+...(IEX-8684@gergate)82> end
+["Dave", "Elixir"]
+
+```
+
+### マップの更新
+
+```elixir
+new_map = %{old_map | key => value, ...}
+```
+
+のような書き方でマップを更新できる。
+新しいキーをマップに追加するには `Map.put_new/3`を使う。
