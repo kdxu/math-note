@@ -9,3 +9,5 @@
 # study-note
 
 おべんきょう、イベントのメモなど
+
+:innocent:
