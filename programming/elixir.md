@@ -4,30 +4,34 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
-- [第1章　`赤いカプセルを取れ`](#%E7%AC%AC1%E7%AB%A0%E3%80%80%E8%B5%A4%E3%81%84%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8C)
-  - [1.1](#11)
-  - [パイプラインによる変換の組み合わせ](#%E3%83%91%E3%82%A4%E3%83%97%E3%83%A9%E3%82%A4%E3%83%B3%E3%81%AB%E3%82%88%E3%82%8B%E5%A4%89%E6%8F%9B%E3%81%AE%E7%B5%84%E3%81%BF%E5%90%88%E3%82%8F%E3%81%9B)
-  - [関数 = データ変換器](#%E9%96%A2%E6%95%B0--%E3%83%87%E3%83%BC%E3%82%BF%E5%A4%89%E6%8F%9B%E5%99%A8)
-- [第2章](#%E7%AC%AC2%E7%AB%A0)
-  - [代入](#%E4%BB%A3%E5%85%A5)
-  - [リストのマッチ](#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E3%83%9E%E3%83%83%E3%83%81)
-  - [アンダースコア](#%E3%82%A2%E3%83%B3%E3%83%80%E3%83%BC%E3%82%B9%E3%82%B3%E3%82%A2)
-  - [pin operator](#pin-operator)
-  - [パイプ演算子](#%E3%83%91%E3%82%A4%E3%83%97%E6%BC%94%E7%AE%97%E5%AD%90)
-  - [モジュール](#%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB)
-    - [モジュールのディレクティブ](#%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%81%AE%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%86%E3%82%A3%E3%83%96)
-    - [モジュール属性](#%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E5%B1%9E%E6%80%A7)
-  - [Elixir, Erlang, アトム](#elixir-erlang-%E3%82%A2%E3%83%88%E3%83%A0)
-    - [Erlangライブラリの呼び出し](#erlang%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%AE%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97)
-- [第7章 リストと再帰](#%E7%AC%AC7%E7%AB%A0-%E3%83%AA%E3%82%B9%E3%83%88%E3%81%A8%E5%86%8D%E5%B8%B0)
-- [第8章 マップ、キーワードリスト、セット、構造体](#%E7%AC%AC8%E7%AB%A0-%E3%83%9E%E3%83%83%E3%83%97%E3%80%81%E3%82%AD%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%89%E3%83%AA%E3%82%B9%E3%83%88%E3%80%81%E3%82%BB%E3%83%83%E3%83%88%E3%80%81%E6%A7%8B%E9%80%A0%E4%BD%93)
-  - [map vs keyword list](#map-vs-keyword-list)
-  - [キーワードリスト](#%E3%82%AD%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%89%E3%83%AA%E3%82%B9%E3%83%88)
-  - [マップ](#%E3%83%9E%E3%83%83%E3%83%97)
-    - [パターンマッチ](#%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%83%9E%E3%83%83%E3%83%81)
-    - [パターンマッチはキーに値を束縛できない](#%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%83%9E%E3%83%83%E3%83%81%E3%81%AF%E3%82%AD%E3%83%BC%E3%81%AB%E5%80%A4%E3%82%92%E6%9D%9F%E7%B8%9B%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84)
-  - [マップの更新](#%E3%83%9E%E3%83%83%E3%83%97%E3%81%AE%E6%9B%B4%E6%96%B0)
-- [構造体](#%E6%A7%8B%E9%80%A0%E4%BD%93)
+  - [第1章　`赤いカプセルを取れ`](#%E7%AC%AC1%E7%AB%A0%E3%80%80%E8%B5%A4%E3%81%84%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB%E3%82%92%E5%8F%96%E3%82%8C)
+    - [1.1](#11)
+    - [パイプラインによる変換の組み合わせ](#%E3%83%91%E3%82%A4%E3%83%97%E3%83%A9%E3%82%A4%E3%83%B3%E3%81%AB%E3%82%88%E3%82%8B%E5%A4%89%E6%8F%9B%E3%81%AE%E7%B5%84%E3%81%BF%E5%90%88%E3%82%8F%E3%81%9B)
+    - [関数 = データ変換器](#%E9%96%A2%E6%95%B0--%E3%83%87%E3%83%BC%E3%82%BF%E5%A4%89%E6%8F%9B%E5%99%A8)
+  - [第2章](#%E7%AC%AC2%E7%AB%A0)
+    - [代入](#%E4%BB%A3%E5%85%A5)
+    - [リストのマッチ](#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E3%83%9E%E3%83%83%E3%83%81)
+    - [アンダースコア](#%E3%82%A2%E3%83%B3%E3%83%80%E3%83%BC%E3%82%B9%E3%82%B3%E3%82%A2)
+    - [pin operator](#pin-operator)
+    - [パイプ演算子](#%E3%83%91%E3%82%A4%E3%83%97%E6%BC%94%E7%AE%97%E5%AD%90)
+    - [モジュール](#%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB)
+      - [モジュールのディレクティブ](#%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%81%AE%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%86%E3%82%A3%E3%83%96)
+      - [モジュール属性](#%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E5%B1%9E%E6%80%A7)
+    - [Elixir, Erlang, アトム](#elixir-erlang-%E3%82%A2%E3%83%88%E3%83%A0)
+      - [Erlangライブラリの呼び出し](#erlang%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%AE%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%97)
+  - [第7章 リストと再帰](#%E7%AC%AC7%E7%AB%A0-%E3%83%AA%E3%82%B9%E3%83%88%E3%81%A8%E5%86%8D%E5%B8%B0)
+  - [第8章 マップ、キーワードリスト、セット、構造体](#%E7%AC%AC8%E7%AB%A0-%E3%83%9E%E3%83%83%E3%83%97%E3%80%81%E3%82%AD%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%89%E3%83%AA%E3%82%B9%E3%83%88%E3%80%81%E3%82%BB%E3%83%83%E3%83%88%E3%80%81%E6%A7%8B%E9%80%A0%E4%BD%93)
+    - [map vs keyword list](#map-vs-keyword-list)
+    - [キーワードリスト](#%E3%82%AD%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%89%E3%83%AA%E3%82%B9%E3%83%88)
+    - [マップ](#%E3%83%9E%E3%83%83%E3%83%97)
+      - [パターンマッチ](#%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%83%9E%E3%83%83%E3%83%81)
+      - [パターンマッチはキーに値を束縛できない](#%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%83%9E%E3%83%83%E3%83%81%E3%81%AF%E3%82%AD%E3%83%BC%E3%81%AB%E5%80%A4%E3%82%92%E6%9D%9F%E7%B8%9B%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84)
+    - [マップの更新](#%E3%83%9E%E3%83%83%E3%83%97%E3%81%AE%E6%9B%B4%E6%96%B0)
+  - [構造体](#%E6%A7%8B%E9%80%A0%E4%BD%93)
+  - [入れ子になった辞書構造体](#%E5%85%A5%E3%82%8C%E5%AD%90%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%9F%E8%BE%9E%E6%9B%B8%E6%A7%8B%E9%80%A0%E4%BD%93)
+  - [セット](#%E3%82%BB%E3%83%83%E3%83%88)
+- [第9章 型](#%E7%AC%AC9%E7%AB%A0-%E5%9E%8B)
+- [第10章 Enum, Stream](#%E7%AC%AC10%E7%AB%A0-enum-stream)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -556,3 +560,77 @@ end
 ```
 
 エリクサーにも構造体はある。
+
+```elixir
+iex(2)> sl = %Subscriber{}
+%Subscriber{name: "", over_18: true, paid: false}
+iex(3)> s2 = %Subscriber{name: "kyoko"}
+%Subscriber{name: "kyoko", over_18: true, paid: false}
+iex(4)> s3 = %Subscriber{name: "geru", paid: true}
+%Subscriber{name: "geru", over_18: true, paid: true}
+iex(5)> s3.name
+"geru"
+iex(6)> s4 = %Subscriber{s3 | name: "newgeruge"}
+%Subscriber{name: "newgeruge", over_18: true, paid: true}
+```
+
+こんな感じでマップと同じように作れて、値を更新できる。
+
+```elixir
+defmodule Atendee do
+  defstruct name: "", paid: false, over_18: true
+
+  def may_attend_after_party(atendee = %Atendee{}) do
+    atendee.paid && atendee.over_18
+  end
+
+  def print_vip_badge(%Atendee{name : name}) when name != "" do
+    IO.puts "very cheep badge for #{name}"
+  end
+
+  def print_vip_badge(%Atendee{})  do
+    raise "missing name for badge"
+  end
+end
+```
+
+マップとの違いは、構造体独自の関数を追加することができる点である。
+
+## 入れ子になった辞書構造体
+
+入れ子になった構造体の値を更新するとき、これまでのやり方だと
+
+```elixir
+iex > report = %Hoge{ name | huga_name: %Huga ...]}
+```
+
+のように書かなければならず、非常に煩雑である。
+`put_in`という入れ子アクセサのメソッドを使って、以下のように書ける。
+
+```elixir
+iex > put_in(report.name.huga_name, "aaaa")
+```
+
+とはいえこれは単なるマクロらしい。
+`update_in`も似たように入れ子にアクセスし、値に関数を適用する。
+
+```elixir
+iex> update_in(report.name.huga_name, &("!!!" <> &1))
+```
+
+`get_in`や`get_and_update` などの入れ子アクセサもある。
+
+マップやキーワードリストに入れ子アクセサを用いる場合は、キーをアトムで書くことができる。
+
+`get_in`や`get_and_update` などは、関数をキーとして渡すと、対応する値を返す。これは動的なバージョンがサポートされているからである。
+
+## セット
+
+`MapSet` というセットの実装がある。
+
+# 第9章 型
+
+プリミティブなデータ型は、それが表現できる型と同じである必要がない。
+duck typingとOCamlのstructural subtyping 似てるよね
+
+# 第10章 Enum, Stream
