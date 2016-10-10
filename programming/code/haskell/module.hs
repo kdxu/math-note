@@ -1,7 +1,8 @@
 module Main where
 
+import           Control.Monad
 import           Data.List
-import qualified Data.Map  as Map
+import qualified Data.Map      as Map
 numUniques :: (Eq a) => [a] -> Int
 numUniques = length . nub
 -- \xs -> length (nub xs) と同型
@@ -13,7 +14,12 @@ findKey key ((k,v):xs)
 findKey' :: (Eq k) => k -> [(k,v)] -> Maybe v
 findKey' key = foldr (\(k,v) acc -> if key == k then Just v else acc) Nothing
 main :: IO ()
-main = putStrLn "Hello World"
+main = do
+    line <- getLine
+    unless (null line) $ do
+            putStrLn line
+            main
+
 
 phonebook :: Map.Map String String
 phonebook = Map.fromList [("betty", "1010101")]
@@ -47,4 +53,4 @@ vectMult :: (Num t) => Vector t -> t -> Vector t
 (Vector i j k) `vectMult` m = Vector (i*m) (j*m) (k*m)
 
 scalarMult :: (Num t) => Vector t -> Vector t -> t
-(Vector i j k) `scalarMult` (Vector l m n) = i*l + j*m + k*n  
+(Vector i j k) `scalarMult` (Vector l m n) = i*l + j*m + k*n
