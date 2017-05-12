@@ -1,8 +1,8 @@
 = プロフェッショナル SSL/TLS 読書会
 
-== 第一回 5/12/2017
+CAUTION: 第一回 5/12/2017
 
-=== 1 SSL/TLS と暗号技術
+== 1 SSL/TLS と暗号技術
 
 TLS:TCP/UDP に対して security を提供する
 
@@ -73,3 +73,63 @@ NOTE: 暗号処理のプロトコルは自分で実装しない
 ----
 Bobと話しているかのようにAliceに思い込ませる
 ----
+
+=== 2 プロトコル
+
+* @hmikisato
+
+==== Record プロトコル
+* 圧縮は脆弱性となりうるので基本的に行わない
+* Fragment は Payload
+* 裏で送受信したバッファのシーケンスを数えておく
+
+.HandShake プロトコル
+* だいたい三通り
+* セッションリザンプション
+* クライアント認証を伴うハンドシェイク
+
+* 2RTT
+
+.ClientHello
+* Session Id, Cipher Suite, Random, Extentions
+
+.CipherSuite
+----
+要補足
+----
+
+.ServerHello
+* ClientHello と形式が同じ
+* Session ID はここで決定される
+
+.Certificate
+----
+X.509 証明書チェーンを返す
+----
+
+.ServerKeyExchange
+----
+POODLE 問題
+----
+
+.Certificate
+
+==== クライアント認証
+
+.鍵交換、認証
+----
+[ Header < IV < Enc < MAC ]
+----
+
+.Mac-Then-Encrypt がなぜ脆弱なのか
+[NOTE]
+EKR 本に書いてある
+
+Nonce, Sequence, Record Msg
+
+.再ネゴシエーション
+----
+脆弱性の温床
+その回避のために renegotiation_info 拡張がある
+----
+
