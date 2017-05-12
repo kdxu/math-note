@@ -133,3 +133,23 @@ Nonce, Sequence, Record Msg
 その回避のために renegotiation_info 拡張がある
 ----
 
+.拡張
+NOTE: Session Ticket は鍵管理が大変, PFS が崩れてしまうので現状は使わないほうがよい. TLS1.3 では使えるかも
+
+.プロトコルの限界
+----
+TCP より下のレイヤは平文で通信される
+IPレベルで暗号化したい場合は IPSec を使う
+Session ID とかクライアント証明書とかSNI がだだ漏れてしまう
+----
+
+.バージョン間での相違
+----
+TLS1.0 -> TLS1.2
+PRF, verify_data の長さが暗号スイートで規定できるように
+
+TLS1.2 -> TLS1.3
+yabai
+----
+
+
